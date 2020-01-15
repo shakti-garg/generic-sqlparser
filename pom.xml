@@ -4,23 +4,67 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.shakti-garg</groupId>
+    <groupId>org.shaktig</groupId>
     <artifactId>generic-sqlparser</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <target.jvm>1.6</target.jvm>
+        <antlr.version>4.7.2</antlr.version>
+    </properties>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <id>download-MySQLLexer-grammar</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://raw.githubusercontent.com/antlr/grammars-v4/master/mysql/Positive-Technologies/MySqlLexer.g4</url>
+                            <outputFileName>MySqlLexer.g4</outputFileName>
+                            <outputDirectory>src/main/antlr4/org/shaktig/sqlparser/mysql</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <skipCache>true</skipCache>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-MySQLParser-grammar</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://raw.githubusercontent.com/antlr/grammars-v4/master/mysql/Positive-Technologies/MySqlParser.g4</url>
+                            <outputFileName>MySqlParser.g4</outputFileName>
+                            <outputDirectory>src/main/antlr4/org/shaktig/sqlparser/mysql</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <skipCache>true</skipCache>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
-                <version>4.3</version>
+                <version>${antlr.version}</version>
                 <executions>
                     <execution>
                         <id>antlr</id>
                         <goals>
                             <goal>antlr4</goal>
                         </goals>
+                        <configuration>
+                            <libDirectory>src/main/antlr4/org/shaktig/sqlparser/mysql</libDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -38,8 +82,8 @@
                 <version>3.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${target.jvm}</source>
+                    <target>${target.jvm}</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -49,7 +93,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.7.2</version>
+            <version>${antlr.version}</version>
         </dependency>
     </dependencies>
 
