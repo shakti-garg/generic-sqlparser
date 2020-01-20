@@ -29,7 +29,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://raw.githubusercontent.com/antlr/grammars-v4/master/mysql/Positive-Technologies/MySqlLexer.g4</url>
+                            <url>https://raw.githubusercontent.com/antlr/grammars-v4/master/sql/mysql/Positive-Technologies/MySqlLexer.g4</url>
                             <outputFileName>MySqlLexer.g4</outputFileName>
                             <outputDirectory>src/main/antlr4/org/shaktig/sqlparser/mysql</outputDirectory>
                             <overwrite>true</overwrite>
@@ -43,7 +43,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://raw.githubusercontent.com/antlr/grammars-v4/master/mysql/Positive-Technologies/MySqlParser.g4</url>
+                            <url>https://raw.githubusercontent.com/antlr/grammars-v4/master/sql/mysql/Positive-Technologies/MySqlParser.g4</url>
                             <outputFileName>MySqlParser.g4</outputFileName>
                             <outputDirectory>src/main/antlr4/org/shaktig/sqlparser/mysql</outputDirectory>
                             <overwrite>true</overwrite>
